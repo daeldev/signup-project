@@ -1,47 +1,55 @@
 <?php
 
-require_once __DIR__ . '/../service/ClientService.php';
-require_once __DIR__ . '/../model/Client.php';
+// Importa conexão e model
+require_once __DIR__ . '/../core/database.php';
+require_once __DIR__ . '/../model/client.php';
 
-class ClientController{
+class ClientService {
 
-    private $service;
+    // Variável que guarda a conexão PDO
+    private $db;
 
-    // Construtor que inicializa o service
+    // Construtor público (para o controller poder instanciar)
     public function __construct() {
-        $this->service = new ClientService();
+
+        // Obtém instância da classe database (padrão Singleton)
+        // getInstance() → retorna sempre a mesma conexão
+        $this->db = database::getInstance()->getConnection();
     }
 
-    // Método responsável por registrar um cliente
-    public function registerClient(): array{
-        try{
-            
-            // Captura o JSON vindo do js
-            $data = json_decode(file_get_contents("php://input"), true);
+    // Método responsável por criar um cliente no banco
+    public function create(Client $client) {
 
-            // Se o JSON não vier
-            if(!$data){
-                return [
-                    'success' => false,
-                    'error' => 'Invalid JSON received'
-                ];
-            }
+        try {
 
-            // Cria o model client com os dados recebidos no JSON
-            $client = new Client(
-                $data['firstName'],
-                $data['lastName'],
-                $data['email'],
-                $data['password']
-            );
+            // SQL com parâmetros nomeados
+            $sql = "INSERT INTO client (first_name, last_name, email, password)
+                    VALUES (:first_name, :last_name, :email, :password)";
 
-            // Chama o service e envia o model para o método create
-            return $this->service->create($client);
+            // Prepara o SQL para evitar SQL Injection
+            $stmt = $this->db->prepare($sql);
 
-        } catch(Exception $e){
+            // Vincula valores aos parâmetros da query
+            $stmt->bindValue(':first_name', $client->getFirstName());
+            $stmt->bindValue(':last_name', $client->getLastName());
+            $stmt->bindValue(':email', $client->getEmail());
+            $stmt->bindValue(':password', $client->getPassword());
+
+            // Executa a query
+            $success = $stmt->execute();
+
+            // Retorna resposta padronizada para o controller
             return [
-                    'success' => false,
-                    'error' => $e->getMessage()
+                'success' => $success,
+                'error' => null
+            ];
+
+        } catch (PDOException $e) {
+
+            // Em caso de erro, retorna mensagem estruturada
+            return [
+                'success' => false,
+                'error' => $e->getMessage()
             ];
         }
     }
