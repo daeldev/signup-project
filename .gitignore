@@ -1,0 +1,56 @@
+# Composer
+/vendor/
+composer.lock
+
+# Node
+/node_modules/
+npm-debug.log
+yarn.lock
+
+# Env files
+.env
+.env.*.php
+.env.local
+.env.backup
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Build files
+/public/storage
+/storage/*.key
+/storage/framework/cache/data
+/storage/logs
+/storage/debugbar
+/bootstrap/cache/*
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+
+# Generated files
+/public/hot
+/public/storage
+/storage/*.key
+
+# PHPStorm
+/.idea
+
+# Laravel specific (if you later add a Laravel app)
+vendor/
+node_modules/
+.env
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
