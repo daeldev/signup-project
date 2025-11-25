@@ -1,49 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign-up form</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <main class="container">
-        <section class="intro">
-            <h1>Learn to code by watching others</h1>
-            <p class="introText">
-                See how experienced developers solve problems in real-time.
-                Watching scripted tutorials is great, but understanding how
-                developers think is invaluable.
-            </p>
-        </section>
+<?php
 
-        <section class="form">
-            <div class="card">
-                <p class="cardText">
-                    <strong>Try it free 7 days</strong> then $20/mo. thereafter
-                </p>
-            </div>
+use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 
-            <form action="backend/register.php" method="post" id="form" novalidate>
-                <input type="text" id="firstName" name="firstName" placeholder="First Name" required/>
-                <p id="firstNameError"></p>
-                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required/>
-                <p id="lastNameError"></p>               
-                <input type="email" id="email" name="email" placeholder="Email Address" required/>
-                <p id="emailError"></p>   
-                <input type="password" id="password" name="password" placeholder="Password" required/>
-                <p id="passwordError"></p>   
-                <button type="submit" id="btnClaim">CLAIM YOUR FREE TRIAL</button>
-                <p id="formTerms">
-                    By clicking the button, you are agreeing to
-                    our <a href="#">Terms and Services</a>
-                </p>
-            </form>
-        </section>
-    </main>   
-    <script src="js/script.js"></script>
-</body>
-</html>
+define('LARAVEL_START', microtime(true));
+
+// Determine if the application is in maintenance mode...
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+    require $maintenance;
+}
+
+// Register the Composer autoloader...
+require __DIR__.'/../vendor/autoload.php';
+
+// Bootstrap Laravel and handle the request...
+/** @var Application $app */
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
+$app->handleRequest(Request::capture());
