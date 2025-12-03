@@ -1,0 +1,33 @@
+# Dockerfile.dev
+FROM php:8.2-fpm
+
+# Install system deps
+RUN apt-get update && apt-get install -y \
+    git unzip libpq-dev libzip-dev libonig-dev \
+    libpng-dev libjpeg-dev libfreetype6-dev \
+    zip curl nodejs npm build-essential gnupg2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# PHP extensions
+RUN docker-php-ext-install pdo pdo_pgsql mbstring zip exif pcntl bcmath gd
+
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Create working directory
+WORKDIR /var/www/html
+
+# Copy composer files first for caching dependencies on build
+COPY composer.json composer.lock ./
+RUN composer install --prefer-dist --no-progress --no-suggest --no-interaction || true
+
+# Copy app sources
+COPY . .
+
+# Ensure storage permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Expose php-fpm port
+EXPOSE 9000
+
+CMD ["php-fpm"]
