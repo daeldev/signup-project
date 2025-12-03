@@ -7,21 +7,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 // Extende o Model, herdando todas as funcionalidades
-class Client extends Model{
+class Client extends Model
+{
 
     // Define o nome da tabela associada ao bd
-    protected $table = 'client';
+    protected $table = 'clients';
 
-    // Cria uma lista de atributos
-    protected $fillable =[
+    protected $fillable = [
         'first_name',
         'last_name',
         'email',
         'password',
     ];
 
-    // Esconde o password de respostas JSON
-    protected $hidden =[
+    protected $hidden = [
         'password',
     ];
 }
