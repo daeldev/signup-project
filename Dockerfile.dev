@@ -24,17 +24,18 @@ RUN composer install --prefer-dist --no-progress --no-suggest --no-interaction |
 # Copy app sources
 COPY . .
 
-# copia o entrypoint
+# Copia o entrypoint
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# usa o entrypoint (roda depois do volume montar)
-ENTRYPOINT ["entrypoint.sh"]
+# Permissões
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# comando padrão
-CMD ["php-fpm"]
-
-# expõe porta do php-fpm
+# Porta do PHP-FPM
 EXPOSE 9000
 
+# Define entrypoint
+ENTRYPOINT ["entrypoint.sh"]
+
+# Comando padrão
 CMD ["php-fpm"]
