@@ -1,5 +1,5 @@
 :root{
-    --bg-url: url(/images/bg-intro-mobile.png);
+    --bg-url: url("/images/bg-intro-mobile.png");
     --color-bg: hsl(0, 100%, 74%);
     --color-text: hsl(246, 25%, 77%);
     --color-input-text: hsl(249, 10%, 26%);
@@ -155,7 +155,7 @@ a{
 
 @media (min-width: 768px) {
     :root{
-        --bg-url: url(/images/bg-intro-desktop.png);
+        --bg-url: url("/images/bg-intro-desktop.png");
     }
 
     .container{

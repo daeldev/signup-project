@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			
 			try{
 				// Envia a requisição HTTP através da API fetch, incluindo o objeto com os dados
-				const response = await fetch("http://localhost:8000/controller/clientController.php?action=register", {
+				const response = await fetch("/api/client/register", {
 					method: "POST", // Define o método POST, pois está enviando dados
 					headers: {
 						"Content-Type": "application/json" // Define o conteúdo JSON
