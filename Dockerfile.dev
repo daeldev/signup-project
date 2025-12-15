@@ -24,14 +24,17 @@ RUN composer install --prefer-dist --no-progress --no-suggest --no-interaction |
 # Copy app sources
 COPY . .
 
-# cria os diretórios que Laravel precisa
-RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache \
-    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-    
-# Ensure storage permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# copia o entrypoint
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Expose php-fpm port
+# usa o entrypoint (roda depois do volume montar)
+ENTRYPOINT ["entrypoint.sh"]
+
+# comando padrão
+CMD ["php-fpm"]
+
+# expõe porta do php-fpm
 EXPOSE 9000
 
 CMD ["php-fpm"]
