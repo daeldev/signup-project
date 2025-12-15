@@ -1,0 +1,192 @@
+:root{
+    --bg-url: url("/images/bg-intro-mobile.png");
+    --color-bg: hsl(0, 100%, 74%);
+    --color-text: hsl(246, 25%, 77%);
+    --color-input-text: hsl(249, 10%, 26%);
+    --color-card: hsl(248, 32%, 49%);
+    --color-form: white;
+    --color-btn: hsl(154, 59%, 51%);
+    --font-family: "Figtree", sans-serif;
+}
+
+*, *::after, *::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    background-image: var(--bg-url);
+    background-color: var(--color-bg);
+    font-family: var(--font-family);
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    margin: 70px auto;
+    max-width: 375px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 3rem;
+    line-height: 2.2rem;
+    padding: 3rem;
+}
+
+.intro h1{
+    font-weight: 700;
+    font-size: 3rem;
+    margin: 0 auto;
+    text-align: center;
+    max-width: 25rem;
+    line-height: 3rem;
+    margin-bottom: 20px;
+}
+
+.introText {
+    max-width: 30rem; /* reduz um pouco pra quebrar antes */
+    margin: 0 auto;
+    text-align: center; /* mantém alinhamento visual parecido com padding */
+    font-weight: 400;
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+}
+
+.card{
+    background-color: var(--color-card);
+    min-height: 80px;
+    border-radius: 1.2rem;
+    align-content: center;
+    justify-items: center;
+    margin-bottom: 20px; 
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid hsla(248, 32%, 49%, 0.657);
+}
+
+.card:hover{
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.cardText{
+    font-weight: 500;
+    font-size: 1.5rem;
+    max-width: 20rem;
+}
+
+#form{
+    background-color: var(--color-form);
+    padding: 20px;
+    border-radius: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+#form:hover{
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+input{
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 1rem;
+    outline: none;
+    text-align: left;
+    padding: 15px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.101);
+    border-radius: 0.5rem;
+    color: var(--color-input-text);
+}
+
+#btnClaim{
+    background-color: var(--color-btn);
+    color: white;
+    min-height: 50px;
+    border: 1px solid hwb(154 23% 30%);
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+#btnClaim:hover{
+    box-shadow: 0 2px 0 hwb(154 23% 30%);
+    transform: translateY(-5px);
+}
+
+#form #formTerms{
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-text);
+    max-width: 22rem;
+    margin: 0 auto;
+    text-align: center;
+    font-style: normal;
+}
+
+a{
+    text-decoration: none;
+    color: var(--color-bg);
+}
+
+#form p{
+    color: var(--color-bg);
+    font-style: italic;
+    text-align: right;
+    line-height: 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: -10px;
+}
+
+.emailError::placeholder{
+    color: var(--color-bg);
+}
+
+@media (min-width: 768px) {
+    :root{
+        --bg-url: url("/images/bg-intro-desktop.png");
+    }
+
+    .container{
+        display: flex;
+        flex-direction: row;
+        min-width: 100%;
+        justify-content: center;
+        align-items: center;
+        line-height: 2.2rem;
+        padding: 3rem;
+        gap: 100px;
+    }
+
+    .intro h1, .introText{
+        text-align: left;
+        margin-left: 0;
+    }
+
+    html{
+        font-size: 65%;
+    }
+
+    .form{
+        min-width: 450px;
+    }
+
+    .card{
+        min-height: 50px;
+    }
+
+    .cardText{
+        display: inline;
+    }
+}
