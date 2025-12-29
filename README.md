@@ -29,18 +29,6 @@ O projeto é baseado no desafio:
 
 ---
 
-## ⚠️ Importante (DEV)
-
-Este projeto utiliza um **setup Docker simples e previsível**, sem automações perigosas.
-
-- ❌ Não há entrypoint em DEV
-- ❌ Nenhum comando Artisan é executado automaticamente
-- ❌ Permissões não são manipuladas pelo container
-- ✔️ O host controla os arquivos
-- ✔️ Comandos são executados manualmente
-
----
-
 ## 🚀 Como rodar o projeto (DEV)
 
 ### 1️⃣ Clonar o repositório
@@ -92,8 +80,3 @@ docker compose exec app php artisan migrate
 ```bash
 http://localhost:8080
 ```
-
-🧠 Observações  
-O arquivo .env não é versionado  
-O diretório vendor/ é gerado localmente  
-O ambiente de produção será tratado separadamente
