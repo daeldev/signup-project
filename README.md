@@ -22,7 +22,6 @@ O projeto é baseado no desafio:
 - `app/` — Código da aplicação Laravel
 - `public/` — Ponto de entrada da aplicação
 - `database/` — Migrations e seeders
-- `docker/` — Arquivos auxiliares de Docker (sem entrypoint em DEV)
 - `nginx/` — Configuração do Nginx
 - `docker-compose.yml` — Orquestração dos containers
 - `Dockerfile.dev` — Imagem PHP para desenvolvimento
