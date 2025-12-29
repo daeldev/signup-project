@@ -21,7 +21,7 @@ WORKDIR /var/www/html
 COPY . .
 
 # Instala dependências PHP
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
 # Nginx config
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
