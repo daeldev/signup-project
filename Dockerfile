@@ -23,6 +23,9 @@ COPY . .
 # Instala dependências PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
+# Remove config padrão do nginx
+RUN rm -f /etc/nginx/conf.d/default.conf
+
 # Nginx config
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
