@@ -1,38 +1,24 @@
-# Dockerfile.dev
 FROM php:8.2-fpm
 
-# Install system deps
+# Dependências do sistema
 RUN apt-get update && apt-get install -y \
     git unzip libpq-dev libzip-dev libonig-dev \
     libpng-dev libjpeg-dev libfreetype6-dev \
-    zip curl nodejs npm build-essential gnupg2 \
+    zip curl nodejs npm build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# PHP extensions
-RUN docker-php-ext-install pdo pdo_pgsql mbstring zip exif pcntl bcmath gd
+# Extensões PHP necessárias
+RUN docker-php-ext-install \
+    pdo pdo_pgsql mbstring zip exif pcntl bcmath gd
 
-# Install Composer
+# Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Create working directory
+# Diretório da aplicação
 WORKDIR /var/www/html
-
-# Copy composer files first for caching dependencies on build
-COPY composer.json composer.lock ./
-RUN composer install --prefer-dist --no-progress --no-suggest --no-interaction || true
-
-# Copy app sources
-COPY . .
-
-# Copia o entrypoint
-COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Porta do PHP-FPM
 EXPOSE 9000
-
-# Define entrypoint
-ENTRYPOINT ["entrypoint.sh"]
 
 # Comando padrão
 CMD ["php-fpm"]
